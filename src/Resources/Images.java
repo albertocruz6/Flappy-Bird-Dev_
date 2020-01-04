@@ -8,10 +8,11 @@ import javax.imageio.ImageIO;
 public class Images {
 	//Put all Image/SpriteSheet/Image Array fields here
 	
-	//BufferedIMage[] arr = new BufferedImage[capacity]
+	//BufferedImage[] arr = new BufferedImage[capacity]
 	//BufferedImage img = new BufferedImage();
 	
 	public static SpriteSheet gameSprite;
+	public static SpriteSheet pipeSheet;
 	public static BufferedImage background;
 	
 	public Images() {
@@ -31,6 +32,7 @@ public class Images {
 			 */
 			
 			gameSprite = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/gameSprite.png")));
+			pipeSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/pipes.png")));
 			
 			background = gameSprite.crop(0, 0, 145, 257);
 		

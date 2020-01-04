@@ -44,7 +44,7 @@ public class GameSetup implements Runnable{
 		this.title = title;
 		keyManager = new KeyManager();
 		mouseManager = new MouseManager();
-		//musicHandler = new MusicHandler(handler); uncomment this later on to activate music
+		//musicHandler = new MusicHandler(handler); uncomment this later to enable music
 		
 	}
 

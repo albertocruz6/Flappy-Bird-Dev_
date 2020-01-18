@@ -5,6 +5,7 @@ import java.awt.image.BufferStrategy;
 
 import Display.DisplayScreen;
 import Game.GameStates.GameState;
+import Game.GameStates.GetReadyState;
 import Game.GameStates.MenuState;
 import Game.GameStates.State;
 import Input.KeyManager;
@@ -27,7 +28,7 @@ public class GameSetup implements Runnable{
 	private Graphics g; 
 	
 	//States
-	public State gameState, menuState;
+	public State gameState, menuState, getReadyState;
 	
 	//Input
 	private KeyManager keyManager;
@@ -55,8 +56,9 @@ public class GameSetup implements Runnable{
 		handler = new Handler(this);
 		menuState = new MenuState(handler);
 		gameState = new GameState(handler);
+		getReadyState = new GetReadyState(handler);
 		
-		State.setState(gameState); //change to menuState later
+		State.setState(menuState); //change to menuState later
 	
 	}
 

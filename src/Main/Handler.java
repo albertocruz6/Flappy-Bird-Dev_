@@ -1,12 +1,15 @@
 package Main;
 
+import Game.Entities.EntityManager;
 import Game.World.WorldManager;
 import Input.KeyManager;
+import Input.MouseManager;
 
 public class Handler {
 
 	private GameSetup game;
 	private WorldManager worldManager;
+	private EntityManager entityManager;
 	
 	public Handler(GameSetup game) {
 		this.game = game;
@@ -39,5 +42,19 @@ public class Handler {
 	public void setWorldManager(WorldManager worldManager) {
 		this.worldManager = worldManager;
 	}
+
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+
+	public MouseManager getMouseManager() {
+		return game.getMouseManager();
+	}
+
+	
 
 }

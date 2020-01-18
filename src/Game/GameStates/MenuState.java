@@ -50,7 +50,7 @@ public class MenuState extends State{
 					handler.getMouseManager().setUimanager(null);
 	                handler.getGame().reStart();
 					System.out.println("lol");
-					State.setState(handler.getGame().gameState);
+					State.setState(handler.getGame().gameState); //change to getReadyState later
 				}
 			}));
 		}

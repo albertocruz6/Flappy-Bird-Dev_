@@ -45,7 +45,7 @@ public class GameSetup implements Runnable{
 		this.title = title;
 		keyManager = new KeyManager();
 		mouseManager = new MouseManager();
-		//musicHandler = new MusicHandler(handler); uncomment this later to enable music
+		musicHandler = new MusicHandler(handler); //comment this later to disable music
 		
 	}
 
@@ -62,7 +62,7 @@ public class GameSetup implements Runnable{
 		gameState = new GameState(handler);
 		getReadyState = new GetReadyState(handler);
 		
-		State.setState(gameState); //change to menuState later
+		State.setState(menuState); //change to menuState later
 	
 	}
 

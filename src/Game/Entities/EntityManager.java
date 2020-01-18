@@ -22,6 +22,15 @@ public class EntityManager {
 	}
 
 	public void tick() {
+		settingInitialObst();
+		
+		for (PipeSet p: pipes) {
+			p.tick();
+		}
+		player.tick();
+	}
+	
+	private void settingInitialObst() {
 		if(pipes.size() == 1) {
 			int mult = 150;
 			while(pipes.size() < 4) {
@@ -30,10 +39,6 @@ public class EntityManager {
 			}
 
 		}
-		for (PipeSet p: pipes) {
-			p.tick();
-		}
-		player.tick();
 	}
 
 	public void render(Graphics g) {

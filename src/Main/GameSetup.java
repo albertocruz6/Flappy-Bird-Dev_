@@ -58,7 +58,7 @@ public class GameSetup implements Runnable{
 		gameState = new GameState(handler);
 		getReadyState = new GetReadyState(handler);
 		
-		State.setState(menuState); //change to menuState later
+		State.setState(gameState); //change to menuState later
 	
 	}
 

@@ -32,7 +32,10 @@ public class GameState extends State{
 	public void tick() {
 		this.worldManager.tick();
 		this.entityManager.tick();
-	
+		
+		if(!handler.getEntityManager().getPlayer().alive) {
+			State.setState(handler.getGame().menuState);
+		}
 	}
 
 	@Override

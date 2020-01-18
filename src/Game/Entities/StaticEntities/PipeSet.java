@@ -50,6 +50,7 @@ public class PipeSet extends StaticBase {
 		g2.setColor(Color.black);
 		g.drawImage(Images.pipeUp, lowerR.x, lowerR.y, lowerR.width, lowerR.height,null);
 		g2.draw(lowerR);
+		
 
 	}
 

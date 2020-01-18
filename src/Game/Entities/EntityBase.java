@@ -11,7 +11,7 @@ public abstract class EntityBase {
 	protected float x, y;
 	private int width, height;
 	
-	protected Rectangle bounds;
+	protected Rectangle bounds, upBounds, leftBounds, rightBounds, lowerBounds;
 	
 	public EntityBase(Handler handler, float x, float y, int width ,int height) {
 		this.handler = handler;
@@ -21,6 +21,11 @@ public abstract class EntityBase {
 		this.height = height;
 		
 		bounds = new Rectangle((int) x, (int) y, width, height);
+		
+		upBounds = new Rectangle((int)x, (int)y , width, height/6);
+		leftBounds = new Rectangle((int)x, (int)y, width/6, height);
+		rightBounds = new Rectangle((int)x + 5*width/6, (int)y, width/6, height);
+		lowerBounds = new Rectangle((int)x, (int)y+ 5*height/6, width, height/6);
 	}
 	
 	public abstract void tick();
@@ -28,6 +33,11 @@ public abstract class EntityBase {
 	public abstract void render(Graphics g);
 	
 	public abstract void move();
+	
+	//BOUNDS
+	public Rectangle getUpperBounds() {
+		return upBounds;
+	}
 	
 	//GETTERS AND SETTERS
 	public float getX() {

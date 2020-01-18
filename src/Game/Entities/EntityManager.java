@@ -60,6 +60,10 @@ public class EntityManager {
 		return player;
 	}
 
+	public ArrayList<PipeSet> getPipes() {
+		return pipes;
+	}
+
 
 
 }

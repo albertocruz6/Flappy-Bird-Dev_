@@ -5,14 +5,14 @@ import java.awt.Graphics;
 import Input.MouseManager;
 import Main.Handler;
 import Resources.Images;
-import UI.ClickListener;
+import UI.ClickListlener;
 import UI.UIImageButton;
 import UI.UIManager;
 
 public class MenuState extends State{
 
 	private UIManager uiManager;
-	private MouseManager mouseManager;
+	
 
 	//Assorted Numbers
 	private int xcoord, desiredLimit, fall, reb_1, fall_1, lastX, lastX_1, displace;
@@ -20,7 +20,7 @@ public class MenuState extends State{
 
 	public MenuState(Handler handler) {
 		super(handler);
-		this.uiManager = new UIManager();
+		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUimanager(uiManager);
 		
 		//Title Appear variables
@@ -39,16 +39,19 @@ public class MenuState extends State{
 
 	@Override
 	public void tick() {
+		handler.getMouseManager().setUimanager(uiManager);
 		uiManager.tick();
 
 		if(initialized) {
-			uiManager.addObjects(new UIImageButton(handler.getWidth()/2 - 200,displace,100,60,Images.buttonStart ,new ClickListener(){
+			uiManager.addObjects(new UIImageButton(handler.getWidth()/2 - 200,displace,100,60,Images.buttonStart ,new ClickListlener() {
+				
 				@Override
 				public void onClick() {
+					handler.getMouseManager().setUimanager(null);
+	                handler.getGame().reStart();
 					System.out.println("lol");
-					State.setState(handler.getGame().getReadyState);
+					State.setState(handler.getGame().gameState);
 				}
-
 			}));
 		}
 	}
@@ -109,6 +112,7 @@ public class MenuState extends State{
 			g.drawImage(Images.startButton, handler.getWidth()/2 - 200, displace, 100, 60, null);
 			g.drawImage(Images.scoreButton, handler.getWidth()/2 + 100, displace, 100, 60, null);
 			initialized = true;
+			
 		}
 	}
 }

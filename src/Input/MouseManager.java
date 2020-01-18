@@ -1,10 +1,11 @@
 package Input;
 
-import UI.UIManager;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+
+import UI.UIManager;
 
 /**
  * Created by AlexVR on 7/1/2018.

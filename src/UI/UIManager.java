@@ -1,26 +1,21 @@
 package UI;
 
-//import Main.Handler;
-import Resources.Images;
-//import Resources.MusicHandler;
+import Main.Handler;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Random;
-
-//import com.sun.glass.events.KeyEvent;
 
 /**
  * Created by AlexVR on 7/1/2018.
  */
 public class UIManager {
 
-    //private Handler handler;
+    private Handler handler;
     private ArrayList<UIObject> objects;
 
-    public UIManager() {//Handler handler){
-       //this.handler=handler;
+    public UIManager(Handler handler){
+        this.handler=handler;
         objects = new ArrayList<UIObject>();
     }
 
@@ -62,13 +57,13 @@ public class UIManager {
         objects.remove(o);
     }
 
-//    public Handler getHandler() {
-//        return handler;
-//    }
-//
-//    public void setHandler(Handler handler) {
-//        this.handler = handler;
-//    }
+    public Handler getHandler() {
+        return handler;
+    }
+
+    public void setHandler(Handler handler) {
+        this.handler = handler;
+    }
 
     public ArrayList<UIObject> getObjects() {
         return objects;
@@ -83,8 +78,4 @@ public class UIManager {
             i.active=active;
         }
     }
-    
-
-    
-
 }

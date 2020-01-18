@@ -8,9 +8,9 @@ import java.awt.image.BufferedImage;
  */
 public class UIImageButton extends UIObject{
     private BufferedImage[] images;
-    private ClickListener clicker;
+    private ClickListlener clicker;
 
-    public UIImageButton(float x, float y, int width, int height, BufferedImage[] images,ClickListener clicker ) {
+    public UIImageButton(float x, float y, int width, int height, BufferedImage[] images, ClickListlener clicker) {
         super(x, y, width, height);
         this.images=images;
         this.clicker=clicker;

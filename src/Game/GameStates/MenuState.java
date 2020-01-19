@@ -2,7 +2,6 @@ package Game.GameStates;
 
 import java.awt.Graphics;
 
-import Input.MouseManager;
 import Main.Handler;
 import Resources.Images;
 import UI.ClickListlener;

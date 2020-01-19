@@ -8,6 +8,7 @@ import Game.GameStates.GameState;
 import Game.GameStates.GetReadyState;
 import Game.GameStates.MenuState;
 import Game.GameStates.State;
+import Game.GameStates.WinState;
 import Input.KeyManager;
 import Input.MouseManager;
 import Resources.Images;
@@ -28,7 +29,7 @@ public class GameSetup implements Runnable{
 	private Graphics g; 
 	
 	//States
-	public State gameState, menuState, getReadyState;
+	public State gameState, menuState, getReadyState, winState;
 	
 	//Input
 	private KeyManager keyManager;
@@ -66,8 +67,9 @@ public class GameSetup implements Runnable{
 		menuState = new MenuState(handler);
 		gameState = new GameState(handler);
 		getReadyState = new GetReadyState(handler);
+		winState = new WinState(handler);
 		
-		State.setState(menuState); //change to menuState later
+		State.setState(gameState); //change to menuState later
 	
 	}
 
@@ -133,7 +135,7 @@ public class GameSetup implements Runnable{
 				delta--;
 			}
 			if (timer >= 1_000_000_000) {
-				System.out.println("Ticks and Frames: " + ticks);
+//				System.out.println("Ticks and Frames: " + ticks);
 				ticks = 0;
 				timer = 0;
 			}

@@ -18,10 +18,11 @@ public class Player extends EntityBase {
 	private Animation yBird, rBird, currentAnim;
 	public static boolean alive, passing, justScored;
 	public int score = 0;
-	
-	
+
+
 	//Numbers for point animation
 	private int firstY, staticY, secondY, xDisplacement;
+
 
 	public Player(Handler handler, float x, float y) {
 		super(handler, x, y, 32, 32);
@@ -32,7 +33,7 @@ public class Player extends EntityBase {
 
 		//Character life boolean
 		alive = true;
-		
+
 		//Coin animation variables
 		firstY = (int) y;
 		staticY = 0;
@@ -43,7 +44,10 @@ public class Player extends EntityBase {
 	@Override
 	public void tick() {
 		playerAnim();
+
 		move();
+
+
 	}
 
 	@Override
@@ -54,8 +58,8 @@ public class Player extends EntityBase {
 		g2.draw(bounds);
 		if(justScored)
 			pointAnimation(g);
-		
-		
+
+
 		//		g2.setColor(Color.green);
 		//		g2.draw(upBounds);
 		//		g2.draw(leftBounds);
@@ -67,12 +71,15 @@ public class Player extends EntityBase {
 	public void move() {
 		checkCollisions();
 
-		if(handler.getKeyManager().jump) {
-			handler.getMusicHandler().playSwoosh();;	
-			y -= 10;
+		if (handler.getKeyManager().jump) {
+			jump();
 		}
+//		} else {
+//			y += 10;
+//			bounds.y += 10;
+//		}
 	}
-	
+
 
 	private void playerAnim() {
 		yBird.tick();
@@ -107,7 +114,7 @@ public class Player extends EntityBase {
 			}
 		}
 	}
-	
+
 	private void pointAnimation(Graphics g) {
 		if(firstY > (int) y - 30) {
 			g.drawImage(Images.onePoint, xDisplacement, firstY, 15, 25, null);
@@ -127,6 +134,14 @@ public class Player extends EntityBase {
 			xDisplacement = (int) x;
 			justScored = false;
 		}
+	}
+
+	private void jump() {
+
+		handler.getMusicHandler().playWing();	
+		y -= 10;
+		bounds.y -= 10;
+
 	}
 
 }

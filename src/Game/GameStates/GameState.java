@@ -53,21 +53,16 @@ public class GameState extends State{
 	public void render(Graphics g) {
 		this.worldManager.render(g);
 		this.entityManager.render(g);
-
-		//Temp score box
-		g.setColor(Color.WHITE);
-
 		renderScore(g);
 	}
 
 	public void renderScore(Graphics g) {
 
-		String score = String.valueOf(player.score);
-		char[] scoreArr = score.toCharArray();
 		if (player.score < 10) {
 			g.drawImage(Images.numbers[player.score], handler.getWidth()/ 2  - 5, 65,
 					Images.numbers[player.score].getWidth() * 2,Images.numbers[player.score].getHeight() * 2,null);
 		}
+		
 		if (player.score >= 10 && player.score < 100) {
 			
 			 //Draws First Digit in number

@@ -78,8 +78,8 @@ public class PipeSet extends StaticBase {
 
 	public void initializeRectangle() {
 
-		//initValue = SAFE_SPACE_SIZE + rand.nextInt(this.getHeight() - SAFE_SPACE_SIZE*2 - 150);
-		initValue = handler.getHeight()/2  - 20;
+		initValue = SAFE_SPACE_SIZE + rand.nextInt(this.getHeight() - SAFE_SPACE_SIZE*2 - 150);
+		//initValue = handler.getHeight()/2  - 20;
 
 		//Initialize rectangle in randomized y position
 		upperR.height = initValue;

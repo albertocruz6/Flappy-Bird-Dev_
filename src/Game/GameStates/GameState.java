@@ -37,10 +37,10 @@ public class GameState extends State{
 		if(!handler.getEntityManager().getPlayer().alive) {
 			State.setState(handler.getGame().menuState);
 		}
-		if (handler.getGame().getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
-			System.out.println("lol3");
-			State.setState(handler.getGame().menuState);
-		}
+//		if (handler.getGame().getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) { TEST CODE
+//			System.out.println("lol3");
+//			State.setState(handler.getGame().menuState); 
+//		} 
 	}
 
 	@Override

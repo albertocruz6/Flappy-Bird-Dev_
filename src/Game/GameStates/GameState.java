@@ -1,6 +1,7 @@
 package Game.GameStates;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 
 import Game.Entities.EntityManager;
 import Game.Entities.DynamicEntities.Player;
@@ -34,6 +35,10 @@ public class GameState extends State{
 		this.entityManager.tick();
 		
 		if(!handler.getEntityManager().getPlayer().alive) {
+			State.setState(handler.getGame().menuState);
+		}
+		if (handler.getGame().getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
+			System.out.println("lol3");
 			State.setState(handler.getGame().menuState);
 		}
 	}

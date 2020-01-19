@@ -51,11 +51,16 @@ public class GameSetup implements Runnable{
 
 	private void init() {
 		display = new DisplayScreen(title, width, height);
+		
 		display.getFrame().addKeyListener(keyManager);
+		
 		display.getFrame().addMouseListener(mouseManager);
 		display.getFrame().addMouseMotionListener(mouseManager);
+		
+		display.getCanvas().addKeyListener(keyManager);
 		display.getCanvas().addMouseListener(mouseManager);
 		display.getCanvas().addMouseMotionListener(mouseManager);
+		
 		Images img = new Images();
 		handler = new Handler(this);
 		menuState = new MenuState(handler);
@@ -67,6 +72,7 @@ public class GameSetup implements Runnable{
 	}
 
 	private void tick() {
+		keyManager.tick();
 		if (State.getState() != null) {
 			State.getState().tick();
 		}

@@ -70,6 +70,12 @@ public class GameSetup implements Runnable{
 		if (State.getState() != null) {
 			State.getState().tick();
 		}
+		if(State.getState().equals(gameState)) {
+			musicHandler.pauseBackground();
+		}
+		else {
+			musicHandler.restartBackground();
+		}
 	}
 
 	private void render() {

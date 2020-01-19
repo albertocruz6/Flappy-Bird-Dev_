@@ -42,7 +42,7 @@ public class GameState extends State{
 	public void render(Graphics g) {
 		this.worldManager.render(g);
 		this.entityManager.render(g);
-		
+		g.drawString(String.valueOf(player.score), 200, 10);
 	}
 
 }

@@ -4,6 +4,7 @@ import Game.Entities.EntityManager;
 import Game.World.WorldManager;
 import Input.KeyManager;
 import Input.MouseManager;
+import Resources.MusicHandler;
 
 public class Handler {
 
@@ -11,6 +12,11 @@ public class Handler {
 	private WorldManager worldManager;
 	private EntityManager entityManager;
 	
+	
+	public MusicHandler getMusicHandler() {
+		return game.getMusicHandler();
+	}
+
 	public Handler(GameSetup game) {
 		this.game = game;
 	}

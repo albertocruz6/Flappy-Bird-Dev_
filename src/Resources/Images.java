@@ -26,7 +26,7 @@ public class Images {
 	public static BufferedImage readyIcon, tapIcon, flapIcon, arrowIcon;
 	
 	//Player and objects
-	public static BufferedImage pipeUp, pipeDown;
+	public static BufferedImage pipeUp, pipeDown, onePoint;
 	public static BufferedImage[] yPlayer;
 	public static BufferedImage[] rPlayer;
 	
@@ -53,8 +53,12 @@ public class Images {
 			gameSprite = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/gameSprite.png")));
 			pipeSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/pipes.png")));
 			
+			//Pipes
 			pipeDown = pipeSheet.crop(40, 0, 26, 300);
 			pipeUp = pipeSheet.crop(464, 212, 26, 300);
+			
+			//One Point
+			onePoint = gameSprite.crop(136, 455, 8, 18);
 			
 			yPlayer[0] = gameSprite.crop(3, 491, 17, 12);
 			yPlayer[1] = gameSprite.crop(31, 491, 17, 12);

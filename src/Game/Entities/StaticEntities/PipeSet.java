@@ -18,6 +18,7 @@ public class PipeSet extends StaticBase {
 	private Random rand = new Random();
 	private int initValue;
 	private int moveX;
+	private boolean validPoint, passed;
 
 
 	public PipeSet(Handler handler, float x, float y) {
@@ -29,7 +30,9 @@ public class PipeSet extends StaticBase {
 		lowerR = new Rectangle(0,0,0,0);
 		safeR = new Rectangle(0,0,0,0);
 
-
+		validPoint = true;
+		passed = false;
+		
 		initializeRectangle();
 
 	}
@@ -65,7 +68,9 @@ public class PipeSet extends StaticBase {
 			getUpperR().x = handler.getWidth();
 			getSafeR().x = handler.getWidth();
 			getLowerR().x = handler.getWidth();
-
+			validPoint = true;
+			passed = false;
+			
 		}
 		this.x -= moveX;
 		updateRectangleX();
@@ -73,7 +78,8 @@ public class PipeSet extends StaticBase {
 
 	public void initializeRectangle() {
 
-		initValue = SAFE_SPACE_SIZE + rand.nextInt(this.getHeight() - SAFE_SPACE_SIZE*2 - 150);
+		//initValue = SAFE_SPACE_SIZE + rand.nextInt(this.getHeight() - SAFE_SPACE_SIZE*2 - 150);
+		initValue = handler.getHeight()/2  - 20;
 
 		//Initialize rectangle in randomized y position
 		upperR.height = initValue;
@@ -100,6 +106,8 @@ public class PipeSet extends StaticBase {
 		lowerR.x -= moveX;
 
 	}
+	
+	//GETTERS AND SETTERS
 	public Rectangle getUpperR() {
 		return upperR;
 	}
@@ -111,5 +119,23 @@ public class PipeSet extends StaticBase {
 	public Rectangle getSafeR() {
 		return safeR;
 	}
+
+	public boolean isValidPoint() {
+		return validPoint;
+	}
+
+	public void setValidPoint(boolean validPoint) {
+		this.validPoint = validPoint;
+	}
+
+	public boolean isPassed() {
+		return passed;
+	}
+
+	public void setPassed(boolean passed) {
+		this.passed = passed;
+	}
+
+
 
 }

@@ -44,12 +44,6 @@ public class Player extends EntityBase {
 	public void tick() {
 		playerAnim();
 		move();
-
-	}
-
-	private void playerAnim() {
-		yBird.tick();
-		rBird.tick();
 	}
 
 	@Override
@@ -74,10 +68,17 @@ public class Player extends EntityBase {
 		checkCollisions();
 
 		if(handler.getKeyManager().jump) {
-			handler.getMusicHandler().playWing();	
+			handler.getMusicHandler().playSwoosh();;	
 			y -= 10;
 		}
 	}
+	
+
+	private void playerAnim() {
+		yBird.tick();
+		rBird.tick();
+	}
+
 
 	private void checkCollisions() {
 		Player player = this;

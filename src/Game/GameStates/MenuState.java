@@ -43,13 +43,11 @@ public class MenuState extends State{
 		uiManager.tick();
 
 		if(initialized) {
-			uiManager.addObjects(new UIImageButton(handler.getWidth()/2 - 200,displace,100,60,Images.buttonStart ,new ClickListlener() {
-				
+			uiManager.addObjects(new UIImageButton(handler.getWidth()/2 - 200,displace,100,60,Images.buttonStart ,new ClickListlener() {	
 				@Override
 				public void onClick() {
 					handler.getMouseManager().setUimanager(null);
 	                handler.getGame().reStart();
-					System.out.println("lol");
 					State.setState(handler.getGame().gameState); //change to getReadyState later
 				}
 			}));

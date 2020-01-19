@@ -1,5 +1,7 @@
 package Game.GameStates;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
@@ -47,7 +49,11 @@ public class GameState extends State{
 	public void render(Graphics g) {
 		this.worldManager.render(g);
 		this.entityManager.render(g);
-		g.drawString(String.valueOf(player.score), 200, 10);
+		g.setColor(Color.WHITE);
+		g.fillRect(30, 65, 45, 50);
+		g.setColor(Color.black);
+		g.setFont(new Font("SansSerif", Font.PLAIN, 30));
+		g.drawString(String.valueOf(player.score), 45, 100);
 	}
 
 }

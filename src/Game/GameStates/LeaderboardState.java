@@ -5,14 +5,13 @@ import java.awt.Graphics;
 import Main.Handler;
 import Resources.Images;
 
-public class WinState extends State{
+public class LeaderboardState extends State {
 
 	private int xcoord;
-	
-	public WinState(Handler handler) {
+
+	public LeaderboardState(Handler handler) {
 		super(handler);
-		
-		xcoord = 0;
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -23,8 +22,9 @@ public class WinState extends State{
 
 	@Override
 	public void render(Graphics g) {
+		// TODO Auto-generated method stub
 		backMove(g);
-
 	}
+	
 
 }

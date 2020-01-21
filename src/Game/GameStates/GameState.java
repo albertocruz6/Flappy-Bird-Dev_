@@ -35,7 +35,10 @@ public class GameState extends State{
 		this.entityManager.tick();
 
 		if(!handler.getEntityManager().getPlayer().alive) {
+			handler.getMusicHandler().playHit();
 			State.setState(handler.getGame().menuState);
+			handler.getMusicHandler().playDead();
+			
 		}
 		
 		if (player.score == 1000) {

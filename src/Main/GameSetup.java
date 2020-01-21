@@ -9,6 +9,7 @@ import Game.GameStates.GetReadyState;
 import Game.GameStates.MenuState;
 import Game.GameStates.State;
 import Game.GameStates.WinState;
+import Game.GameStates.LeaderboardState;
 import Input.KeyManager;
 import Input.MouseManager;
 import Resources.Images;
@@ -29,7 +30,7 @@ public class GameSetup implements Runnable{
 	private Graphics g; 
 	
 	//States
-	public State gameState, menuState, getReadyState, winState;
+	public State gameState, menuState, getReadyState, winState, leaderboardState;
 	
 	//Input
 	private KeyManager keyManager;
@@ -68,8 +69,9 @@ public class GameSetup implements Runnable{
 		gameState = new GameState(handler);
 		getReadyState = new GetReadyState(handler);
 		winState = new WinState(handler);
+		leaderboardState = new LeaderboardState(handler);
 		
-		State.setState(gameState); //change to menuState later
+		State.setState(menuState); //change to menuState later
 	
 	}
 

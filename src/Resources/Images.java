@@ -21,6 +21,7 @@ public class Images {
 	//Main Menu
 	public static BufferedImage titleIcon, startButton, scoreButton;
 	public static BufferedImage[] buttonStart;
+	public static BufferedImage[] buttonLeaderboard;
 
 	//Get Ready Screen
 	public static BufferedImage readyIcon, tapIcon, flapIcon, arrowIcon;
@@ -42,6 +43,7 @@ public class Images {
 		rPlayer = new BufferedImage[3];
 
 		buttonStart = new BufferedImage[2];
+		buttonLeaderboard = new BufferedImage[2];
 
 		numbers = new BufferedImage[10];
 
@@ -85,6 +87,9 @@ public class Images {
 
 			buttonStart[0] = startButton;
 			buttonStart[1] = startButton;
+			
+			buttonLeaderboard[0] = scoreButton;
+			buttonLeaderboard[1] = scoreButton;
 
 			//Get Ready Screen
 			readyIcon = gameSprite.crop(295, 59, 92, 25);

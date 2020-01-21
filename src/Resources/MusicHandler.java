@@ -106,6 +106,10 @@ public class MusicHandler {
         Clip clip = getClip(loadAudio("swooshing"));
         clip.start();
     }
+    public void playHit() {
+        Clip clip = getClip(loadAudio("hit"));
+        clip.start();
+    }
     public void playDead() {
         background.stop();
         background = getClip(loadAudio("die"));

@@ -99,6 +99,7 @@ public class Player extends EntityBase {
 				pipeSet.setPassed(true);
 			}
 			else if(player.bounds.intersects(pipeSet.getUpperR()) || player.bounds.intersects(pipeSet.getLowerR())) {
+				
 				alive = false;
 				System.out.println("DED");
 				score = 0;

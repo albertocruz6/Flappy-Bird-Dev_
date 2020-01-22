@@ -21,7 +21,7 @@ public class Player extends EntityBase {
 	
 	
 	//Numbers for point animation
-	private int firstY, staticY, secondY, xDisplacement;
+	private int firstY, secondY, xDisplacement;
 
 	public Player(Handler handler, float x, float y) {
 		super(handler, x, y, 32, 32);
@@ -35,7 +35,6 @@ public class Player extends EntityBase {
 		
 		//Coin animation variables
 		firstY = (int) y;
-		staticY = 0;
 		secondY = 0;
 		xDisplacement = (int) x;
 	}
@@ -50,8 +49,8 @@ public class Player extends EntityBase {
 	public void render(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		g.drawImage(yBird.getCurrentFrame(), (int) x, (int)y, getWidth(), getHeight(), null) ;
-		g2.setColor(Color.black);
-		g2.draw(bounds);
+//		g2.setColor(Color.black);
+//		g2.draw(bounds);
 		if(justScored)
 			pointAnimation(g);
 		
@@ -122,7 +121,6 @@ public class Player extends EntityBase {
 		}
 		else {
 			firstY = (int) y;
-			staticY = 0;
 			secondY = 0;
 			xDisplacement = (int) x;
 			justScored = false;

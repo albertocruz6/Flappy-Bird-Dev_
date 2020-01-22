@@ -44,15 +44,15 @@ public class PipeSet extends StaticBase {
 
 	@Override
 	public void render(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
-		g2.setColor(Color.black);
+//		Graphics2D g2 = (Graphics2D) g;
+//		g2.setColor(Color.black);
 		g.drawImage(Images.pipeDown, upperR.x, upperR.y, upperR.width, upperR.height,null);
-		g2.draw(upperR);
-		g2.setColor(Color.red);
-		g2.draw(safeR);
-		g2.setColor(Color.black);
+//		g2.draw(upperR);
+//		g2.setColor(Color.red);
+//		g2.draw(safeR);
+//		g2.setColor(Color.black);
 		g.drawImage(Images.pipeUp, lowerR.x, lowerR.y, lowerR.width, lowerR.height,null);
-		g2.draw(lowerR);
+//		g2.draw(lowerR);
 		
 
 	}

@@ -8,7 +8,7 @@ import Resources.Images;
 public abstract class State {
 	
 	protected Handler handler;
-	private static int xcoord;
+	protected static int xcoord;
 	private static State currentState = null;
 
 	public State (Handler handler) {
@@ -34,13 +34,9 @@ public abstract class State {
 			g.drawImage(Images.background,-xcoord + 549, 0, 550, 700, null);
 		}
 	}
-	
-	
-	
-	
-	
-	
+
 	public abstract void tick();
+	
 	public abstract void render(Graphics g);
 
 }

@@ -11,7 +11,9 @@ import Resources.Images;
 
 public class PipeSet extends StaticBase {
 
-	private static final int SAFE_SPACE_SIZE = 128;
+	private static final int SAFE_SPACE_SIZE = 128,
+							 PIPE_HEIGHT_SIZE = 680;
+	
 	
 	private Rectangle upperR, lowerR, safeR;
 
@@ -46,7 +48,7 @@ public class PipeSet extends StaticBase {
 	public void render(Graphics g) {
 //		Graphics2D g2 = (Graphics2D) g;
 //		g2.setColor(Color.black);
-		g.drawImage(Images.pipeDown, upperR.x, upperR.y, upperR.width, upperR.height,null);
+		g.drawImage(Images.pipeDown, upperR.x + upperR.width, upperR.y, -upperR.width, upperR.height,null);
 //		g2.draw(upperR);
 //		g2.setColor(Color.red);
 //		g2.draw(safeR);
@@ -82,17 +84,19 @@ public class PipeSet extends StaticBase {
 		//initValue = handler.getHeight()/2  - 20;
 
 		//Initialize rectangle in randomized y position
-		upperR.height = initValue;
+		//upperR.height = initValue;
+		upperR.height = PIPE_HEIGHT_SIZE;
 		upperR.width = this.getWidth();
 		upperR.x = (int) x;
-		upperR.y =  0;
+		upperR.y =  initValue - PIPE_HEIGHT_SIZE;
 
 		safeR.height = SAFE_SPACE_SIZE;
 		safeR.width = this.getWidth();
 		safeR.x = (int) x;
 		safeR.y =  initValue;
 
-		lowerR.height = handler.getHeight() - initValue +  safeR.height ;
+		//lowerR.height = handler.getHeight() - initValue +  safeR.height ;
+		lowerR.height = PIPE_HEIGHT_SIZE;
 		lowerR.width = this.getWidth();
 		lowerR.x = (int) x;
 		lowerR.y =  safeR.height + initValue;

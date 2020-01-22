@@ -15,7 +15,7 @@ public class Player extends EntityBase {
 
 	private Animation yBird, rBird, currentAnim;
 	private static boolean alive, passing, justScored, justJumped,  callJump, initJump, falling;
-	private int score, yInit, yCurr;
+	private int score, yInit, yCurr, gravityValue;
 
 
 	//Numbers for point animation
@@ -28,9 +28,15 @@ public class Player extends EntityBase {
 		yBird = new Animation(200, Images.yPlayer);
 		rBird = new Animation(200, Images.rPlayer);
 
-
+		Random rand  = new Random();
+		boolean yAnim  = rand.nextBoolean();
+		if(yAnim)
+			currentAnim = yBird;
+		else
+			currentAnim = rBird;
 		//Character Variables
 		score = 0;
+		gravityValue = 4;
 		alive = true;
 		initJump = false; 
 		callJump = false;
@@ -43,23 +49,20 @@ public class Player extends EntityBase {
 
 	@Override
 	public void tick() {
-		playerAnim();
-
 		move();
-
-
 	}
 
 	@Override
 	public void render(Graphics g) {
+		playerAnim();
 		Graphics2D g2 = (Graphics2D) g;
-		g.drawImage(yBird.getCurrentFrame(), (int) x, (int)y, getWidth(), getHeight(), null) ;
-//		g2.setColor(Color.black);
-//		g2.draw(bounds);
+		g.drawImage(currentAnim.getCurrentFrame(), (int) x, (int)y, getWidth(), getHeight(), null) ;
+
 		if(justScored)
 			pointAnimation(g);
 
-
+		//		g2.setColor(Color.black);
+		//		g2.draw(bounds);
 		//		g2.setColor(Color.green);
 		//		g2.draw(upBounds);
 		//		g2.draw(leftBounds);
@@ -70,44 +73,37 @@ public class Player extends EntityBase {
 	@Override
 	public void move() {
 		checkCollisions();
-		Random rand  = new Random();
-		
+
+		//If player calls for button and it's not jumping at all
 		if (handler.getKeyManager().jump && !initJump) {
 			handler.getMusicHandler().playWing();
 			falling = false;
 			callJump = true;
 			jump();
-			System.out.println("1");
-			
 		}
+		//If player has finished the jump but has started it
 		else if(initJump && !justJumped && !falling) {
-			jump();
-			System.out.println("2");
+			jump();		
 		}
+		//If it finished the jump
 		else if(justJumped && falling) {
 			justJumped = false;
 			initJump = false;
-			falling();
-			System.out.println("3");
+			falling();	
 		}
-		else if(falling){
+		//Naturally the player is always falling 
+		else {
 			falling();
-			System.out.println("4");
 		}
-		
-//		} else {
-//			y += 10;
-//			bounds.y += 10;
-//		}
 	}
 
-
+	//CHARACTER ANIMATIONS
 	private void playerAnim() {
 		yBird.tick();
 		rBird.tick();
 	}
 
-
+	//CHECK COLLISIONS
 	private void checkCollisions() {
 		Player player = this;
 		ArrayList<PipeSet> pipesSpawned = handler.getEntityManager().getPipes();
@@ -115,17 +111,30 @@ public class Player extends EntityBase {
 		for (PipeSet pipeSet : pipesSpawned) {
 			if(player.bounds.intersects(pipeSet.getSafeR()) &&
 					(!player.bounds.intersects(pipeSet.getUpperR()) && !player.bounds.intersects(pipeSet.getLowerR()))) {
-				//safe!
+				//SAFE!
 				passing = true;
 				pipeSet.setPassed(true);
 			}
 			else if(player.bounds.intersects(pipeSet.getUpperR()) || player.bounds.intersects(pipeSet.getLowerR())) {
-				
+				//HITS A PIPE
 				alive = false;
 				System.out.println("DED");
 				score = 0;
+				firstY = (int) y;
+				secondY = 0;
+				xDisplacement = (int) x;
+			}
+			else if(player.bounds.intersects(handler.getWorldManager().getLowerBound()) || player.bounds.intersects(handler.getWorldManager().getUpperBound())) {
+				//HITS THE FLOOR or TOP OF THE SCREEN
+				alive = false;
+				System.out.println("DED");
+				score = 0;
+				firstY = (int) y;
+				secondY = 0;
+				xDisplacement = (int) x;
 			}
 			else if(!player.bounds.intersects(pipeSet.getSafeR())){
+				//SUCESFULLY SCORE
 				if(pipeSet.isValidPoint() && passing && pipeSet.isPassed()) {
 					score++;
 					pipeSet.setValidPoint(false);
@@ -137,6 +146,7 @@ public class Player extends EntityBase {
 		}
 	}
 
+	//
 	private void pointAnimation(Graphics g) {
 		if(firstY > (int) y - 30) {
 			g.drawImage(Images.onePoint, xDisplacement, firstY, 15, 25, null);
@@ -156,31 +166,42 @@ public class Player extends EntityBase {
 			justScored = false;
 		}
 	}
-	
-	//JUMP
+
+	//JUMP MECHANIC
 	private void jump() {
+		//If button is called set new threshold for y
 		if(callJump) {
+			//Set y to start jump
 			yInit = (int) y;
+			//Start jump
 			initJump  = true;
+			//Await for another call to jump function by player
 			callJump = false;
 		}
+		//MOVE PLAYER Y
 		y -= 10;
 		bounds.y -= 10;
+		//Update current Y
 		yCurr = (int) y;
+		//if it reaches threshold limit it completed the jump
 		if(yCurr <= yInit - 60) {
+			//finished jumping
 			justJumped = true;
+			//gravity immediately starts affecting
 			falling = true;
 		}
-		
-		
-	}
-	
-	private void falling() {
-		y += 3;
-		bounds.y += 3;
+
+
 	}
 
-	
+	//FALL (GRAVITY)
+	private void falling() {
+		falling = true;
+		y += gravityValue;
+		bounds.y += gravityValue;
+	}
+
+
 	//GETTERS AND SETTERS 
 	public int getScore() {
 		return score;

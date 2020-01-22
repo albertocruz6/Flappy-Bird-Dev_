@@ -16,7 +16,8 @@ public class Player extends EntityBase {
 	private Animation yBird, rBird, currentAnim;
 	private static boolean alive, passing, justScored, justJumped,  callJump, initJump, falling;
 	private int score, yInit, yCurr, gravityValue;
-
+	Random rand  = new Random();
+	private final boolean yAnim  = rand.nextBoolean();
 
 	//Numbers for point animation
 	private int firstY, secondY, xDisplacement;
@@ -27,20 +28,18 @@ public class Player extends EntityBase {
 
 		yBird = new Animation(200, Images.yPlayer);
 		rBird = new Animation(200, Images.rPlayer);
-
-		Random rand  = new Random();
-		boolean yAnim  = rand.nextBoolean();
-		if(yAnim)
-			currentAnim = yBird;
-		else
-			currentAnim = rBird;
+	
 		//Character Variables
 		score = 0;
 		gravityValue = 4;
 		alive = true;
 		initJump = false; 
 		callJump = false;
-
+		//Character Animation
+		if(yAnim)
+			currentAnim = yBird;
+		else
+			currentAnim = rBird;
 		//Coin animation variables
 		firstY = (int) y;
 		secondY = 0;

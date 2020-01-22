@@ -34,16 +34,16 @@ public class GameState extends State{
 		this.worldManager.tick();
 		this.entityManager.tick();
 
-		if(!handler.getEntityManager().getPlayer().alive) {
+		if(!handler.getEntityManager().getPlayer().isAlive()) {
 			handler.getMusicHandler().playHit();
 			State.setState(handler.getGame().menuState);
 			handler.getMusicHandler().playDead();
 			
 		}
 		
-		if (player.score == 1000) {
+		if (player.getScore() == 1000) {
 			System.out.println("YOU WIN");
-			System.out.println("Score: " + player.score);
+			System.out.println("Score: " + player.getScore());
 			State.setState(handler.getGame().winState);
 			
 		}
@@ -61,39 +61,39 @@ public class GameState extends State{
 
 	public void renderScore(Graphics g) {
 
-		if (player.score < 10) {
-			g.drawImage(Images.numbers[player.score], handler.getWidth()/ 2  - 5, 65,
-					Images.numbers[player.score].getWidth() * 2,Images.numbers[player.score].getHeight() * 2,null);
+		if (player.getScore() < 10) {
+			g.drawImage(Images.numbers[player.getScore()], handler.getWidth()/ 2  - 5, 65,
+					Images.numbers[player.getScore()].getWidth() * 2,Images.numbers[player.getScore()].getHeight() * 2,null);
 		}
 		
-		if (player.score >= 10 && player.score < 100) {
+		if (player.getScore() >= 10 && player.getScore() < 100) {
 			
 			 //Draws First Digit in number
-			g.drawImage(Images.numbers[player.score / 10], handler.getWidth()/ 2  - 19, 65,
-					Images.numbers[player.score / 10].getWidth() * 2,Images.numbers[player.score / 10].getHeight() * 2,null);
+			g.drawImage(Images.numbers[player.getScore() / 10], handler.getWidth()/ 2  - 19, 65,
+					Images.numbers[player.getScore() / 10].getWidth() * 2,Images.numbers[player.getScore() / 10].getHeight() * 2,null);
 			
 			 //Draws Last Digit in number
-			g.drawImage(Images.numbers[player.score % 10], handler.getWidth()/ 2 + 4, 64, 
-					Images.numbers[player.score % 10].getWidth() * 2,Images.numbers[player.score % 10].getHeight() * 2,null);
+			g.drawImage(Images.numbers[player.getScore() % 10], handler.getWidth()/ 2 + 4, 64, 
+					Images.numbers[player.getScore() % 10].getWidth() * 2,Images.numbers[player.getScore() % 10].getHeight() * 2,null);
 
 
 		}
-		if (player.score >= 100 && player.score < 1000) {
+		if (player.getScore() >= 100 && player.getScore() < 1000) {
 			// Finds total number of digits - 1 
-		    int digits = (int) Math.log10(player.score); 
+		    int digits = (int) Math.log10(player.getScore()); 
 		   
 		    //Draws First Digit in number
-			g.drawImage(Images.numbers[(int)(player.score / Math.pow(10, digits))], handler.getWidth()/ 2  - 19, 65,
-					Images.numbers[(int)(player.score / Math.pow(10, digits))].getWidth() * 2,
-					Images.numbers[(int)(player.score / Math.pow(10, digits))].getHeight() * 2,null);
+			g.drawImage(Images.numbers[(int)(player.getScore() / Math.pow(10, digits))], handler.getWidth()/ 2  - 19, 65,
+					Images.numbers[(int)(player.getScore() / Math.pow(10, digits))].getWidth() * 2,
+					Images.numbers[(int)(player.getScore() / Math.pow(10, digits))].getHeight() * 2,null);
 			
 			 //Draws Second/Middle Digit in number
-			g.drawImage(Images.numbers[(player.score/10) % 10], handler.getWidth()/ 2 + 4, 64, 
-					Images.numbers[(player.score/10) % 10].getWidth() * 2,Images.numbers[(player.score/10) % 10].getHeight() * 2,null);
+			g.drawImage(Images.numbers[(player.getScore()/10) % 10], handler.getWidth()/ 2 + 4, 64, 
+					Images.numbers[(player.getScore()/10) % 10].getWidth() * 2,Images.numbers[(player.getScore()/10) % 10].getHeight() * 2,null);
 			
 			 //Draws Last Digit in number
-			g.drawImage(Images.numbers[player.score % 10], handler.getWidth()/ 2 + 30, 62, 
-					Images.numbers[player.score % 10].getWidth() * 2,Images.numbers[player.score % 10].getHeight() * 2,null);
+			g.drawImage(Images.numbers[player.getScore() % 10], handler.getWidth()/ 2 + 30, 62, 
+					Images.numbers[player.getScore() % 10].getWidth() * 2,Images.numbers[player.getScore() % 10].getHeight() * 2,null);
 			
 
 		}

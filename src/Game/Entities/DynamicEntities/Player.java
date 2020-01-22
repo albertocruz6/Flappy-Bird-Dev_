@@ -1,11 +1,9 @@
 package Game.Entities.DynamicEntities;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Random;
 
 import Game.Entities.EntityBase;
 import Game.Entities.StaticEntities.PipeSet;
@@ -16,8 +14,8 @@ import Resources.Images;
 public class Player extends EntityBase {
 
 	private Animation yBird, rBird, currentAnim;
-	public static boolean alive, passing, justScored;
-	public int score = 0;
+	private static boolean alive, passing, justScored, justJumped,  callJump, initJump, falling;
+	private int score, yInit, yCurr;
 
 
 	//Numbers for point animation
@@ -31,8 +29,11 @@ public class Player extends EntityBase {
 		rBird = new Animation(200, Images.rPlayer);
 
 
-		//Character life boolean
+		//Character Variables
+		score = 0;
 		alive = true;
+		initJump = false; 
+		callJump = false;
 
 		//Coin animation variables
 		firstY = (int) y;
@@ -69,10 +70,31 @@ public class Player extends EntityBase {
 	@Override
 	public void move() {
 		checkCollisions();
-
-		if (handler.getKeyManager().jump) {
+		Random rand  = new Random();
+		
+		if (handler.getKeyManager().jump && !initJump) {
+			handler.getMusicHandler().playWing();
+			falling = false;
+			callJump = true;
 			jump();
+			System.out.println("1");
+			
 		}
+		else if(initJump && !justJumped && !falling) {
+			jump();
+			System.out.println("2");
+		}
+		else if(justJumped && falling) {
+			justJumped = false;
+			initJump = false;
+			falling();
+			System.out.println("3");
+		}
+		else if(falling){
+			falling();
+			System.out.println("4");
+		}
+		
 //		} else {
 //			y += 10;
 //			bounds.y += 10;
@@ -134,13 +156,54 @@ public class Player extends EntityBase {
 			justScored = false;
 		}
 	}
-
+	
+	//JUMP
 	private void jump() {
-
-		handler.getMusicHandler().playWing();	
+		if(callJump) {
+			yInit = (int) y;
+			initJump  = true;
+			callJump = false;
+		}
 		y -= 10;
 		bounds.y -= 10;
+		yCurr = (int) y;
+		if(yCurr <= yInit - 60) {
+			justJumped = true;
+			falling = true;
+		}
+		
+		
+	}
+	
+	private void falling() {
+		y += 3;
+		bounds.y += 3;
+	}
 
+	
+	//GETTERS AND SETTERS 
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public boolean isAlive() {
+		return alive;
+	}
+
+	public void setAlive(boolean alive) {
+		Player.alive = alive;
+	}
+
+	public boolean isFalling() {
+		return falling;
+	}
+
+	public void setFalling(boolean falling) {
+		Player.falling = falling;
 	}
 
 }

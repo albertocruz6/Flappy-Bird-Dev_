@@ -2,7 +2,6 @@ package Game.GameStates;
 
 import java.awt.Graphics;
 
-import Input.MouseManager;
 import Main.Handler;
 import Resources.Images;
 import UI.ClickListlener;
@@ -51,6 +50,15 @@ public class MenuState extends State{
 					State.setState(handler.getGame().gameState); //change to getReadyState later
 				}
 			}));
+			
+			uiManager.addObjects(new UIImageButton(handler.getWidth()/2 + 100, displace,100,60,Images.buttonLeaderboard ,new ClickListlener() {	
+				@Override
+				public void onClick() {
+					handler.getMouseManager().setUimanager(null);
+	                handler.getGame().reStart();
+					State.setState(handler.getGame().leaderboardState); 
+				}
+			}));
 		}
 	}
 
@@ -85,18 +93,6 @@ public class MenuState extends State{
 
 		}
 
-	}
-
-	//Making the background move
-	private void backMove(Graphics g) {
-		xcoord++;
-		if(xcoord == 549) {
-			xcoord = 0;
-		}
-		g.drawImage(Images.background, -xcoord, 0, 554, 700, null);
-		if(xcoord > 0) {
-			g.drawImage(Images.background,-xcoord + 549, 0, 550, 700, null);
-		}
 	}
 
 	//Making buttons appear

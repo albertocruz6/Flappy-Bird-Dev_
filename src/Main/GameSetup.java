@@ -8,6 +8,8 @@ import Game.GameStates.GameState;
 import Game.GameStates.GetReadyState;
 import Game.GameStates.MenuState;
 import Game.GameStates.State;
+import Game.GameStates.WinState;
+import Game.GameStates.LeaderboardState;
 import Input.KeyManager;
 import Input.MouseManager;
 import Resources.Images;
@@ -28,7 +30,7 @@ public class GameSetup implements Runnable{
 	private Graphics g; 
 	
 	//States
-	public State gameState, menuState, getReadyState;
+	public State gameState, menuState, getReadyState, winState, leaderboardState;
 	
 	//Input
 	private KeyManager keyManager;
@@ -51,22 +53,30 @@ public class GameSetup implements Runnable{
 
 	private void init() {
 		display = new DisplayScreen(title, width, height);
+		
 		display.getFrame().addKeyListener(keyManager);
+		
 		display.getFrame().addMouseListener(mouseManager);
 		display.getFrame().addMouseMotionListener(mouseManager);
+		
+		display.getCanvas().addKeyListener(keyManager);
 		display.getCanvas().addMouseListener(mouseManager);
 		display.getCanvas().addMouseMotionListener(mouseManager);
+		
 		Images img = new Images();
 		handler = new Handler(this);
 		menuState = new MenuState(handler);
 		gameState = new GameState(handler);
 		getReadyState = new GetReadyState(handler);
+		winState = new WinState(handler);
+		leaderboardState = new LeaderboardState(handler);
 		
 		State.setState(menuState); //change to menuState later
 	
 	}
 
 	private void tick() {
+		keyManager.tick();
 		if (State.getState() != null) {
 			State.getState().tick();
 		}
@@ -127,7 +137,7 @@ public class GameSetup implements Runnable{
 				delta--;
 			}
 			if (timer >= 1_000_000_000) {
-				System.out.println("Ticks and Frames: " + ticks);
+//				System.out.println("Ticks and Frames: " + ticks);
 				ticks = 0;
 				timer = 0;
 			}

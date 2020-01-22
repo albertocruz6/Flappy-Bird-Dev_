@@ -5,11 +5,11 @@ import java.awt.Graphics;
 import Main.Handler;
 import Resources.Images;
 
-public class GetReadyState extends State{
+public class WinState extends State{
 
 	private int xcoord;
 	
-	public GetReadyState(Handler handler) {
+	public WinState(Handler handler) {
 		super(handler);
 		
 		xcoord = 0;

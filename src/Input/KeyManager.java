@@ -7,6 +7,7 @@ public class KeyManager implements KeyListener {
 	
 	private boolean[] keys;
 	public boolean jump;
+	
 	private boolean[] justPressed;
 	private boolean[] cantPress;
 	
@@ -31,6 +32,7 @@ public class KeyManager implements KeyListener {
 			}
 		}
 		jump = keys[KeyEvent.VK_SPACE];
+
 	}
 
 	@Override
@@ -38,7 +40,6 @@ public class KeyManager implements KeyListener {
 		if(e.getKeyCode() < 0 || e.getKeyCode() >= keys.length)
 			return;
 		keys[e.getKeyCode()] = true;
-		System.out.println("Pressed");
 	}
 
 	@Override

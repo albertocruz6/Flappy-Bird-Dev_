@@ -34,6 +34,9 @@ public class GetReadyState extends State{
 
 	@Override
 	public void tick() {
+		//PLAYER ANIMATION
+		handler.getEntityManager().getPlayer().getCurrentAnim().tick();
+		
 		if(initialized) {
 			if(handler.getKeyManager().jump) {
 				handler.getMouseManager().setUimanager(null);
@@ -49,7 +52,11 @@ public class GetReadyState extends State{
 	public void render(Graphics g) {
 		backMove(g);
 		screenInit(g);
-		handler.getEntityManager().getPlayer().render(g);
+		g.drawImage(handler.getEntityManager().getPlayer().getCurrentAnim().getCurrentFrame(),
+				(int) handler.getEntityManager().getPlayer().getX(),
+				(int) handler.getEntityManager().getPlayer().getY(), 
+				handler.getEntityManager().getPlayer().getWidth(),
+				handler.getEntityManager().getPlayer().getHeight(), null) ;
 	}
 
 	private void screenInit(Graphics g) {

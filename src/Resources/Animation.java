@@ -46,6 +46,13 @@ public class Animation {
         return frames[index];
     }
 
+    public BufferedImage getSpecificFrame(int frame){
+    	if(frame >= frames.length || frame < 0) {
+    		return frames[0];
+    	}
+        return frames[frame];
+    }
+    
     public int getIndex() {
     	return index;
     }

@@ -28,7 +28,7 @@ public class Player extends EntityBase {
 
 		yBird = new Animation(200, Images.yPlayer);
 		rBird = new Animation(200, Images.rPlayer);
-	
+
 		//Character Variables
 		score = 0;
 		gravityValue = 4;
@@ -49,17 +49,28 @@ public class Player extends EntityBase {
 	@Override
 	public void tick() {
 		move();
+		playerAnim();
 	}
 
 	@Override
 	public void render(Graphics g) {
-		playerAnim();
-		Graphics2D g2 = (Graphics2D) g;
-		g.drawImage(currentAnim.getCurrentFrame(), (int) x, (int)y, getWidth(), getHeight(), null) ;
+		
+		//g.drawImage(currentAnim.getCurrentFrame(), (int) x, (int)y, getWidth(), getHeight(), null) ;
+		
+		if(initJump) {
+			g.drawImage(Images.rotate(currentAnim.getSpecificFrame(2), -45), (int) x, (int)y, getWidth(), getHeight(), null) ;
+		}
+		else if(justJumped && falling) {
+			g.drawImage(Images.rotate(currentAnim.getSpecificFrame(1), -25), (int) x, (int)y, getWidth(), getHeight(), null) ;
+		}
+		else
+			g.drawImage(Images.rotate(currentAnim.getSpecificFrame(0), 25), (int) x, (int)y, getWidth(), getHeight(), null) ;
 
 		if(justScored)
 			pointAnimation(g);
 
+		//CODE TO VISUALIZE BOUNDARIES
+		//      Graphics2D g2 = (Graphics2D) g;
 		//		g2.setColor(Color.black);
 		//		g2.draw(bounds);
 		//		g2.setColor(Color.green);
@@ -94,6 +105,40 @@ public class Player extends EntityBase {
 		else {
 			falling();
 		}
+	}
+
+	//JUMP MECHANIC
+	private void jump() {
+		//If button is called set new threshold for y
+		if(callJump) {
+			//Set y to start jump
+			yInit = (int) y;
+			//Start jump
+			initJump  = true;
+			//Await for another call to jump function by player
+			callJump = false;
+		}
+		//MOVE PLAYER Y
+		y -= 10;
+		bounds.y -= 10;
+		//Update current Y
+		yCurr = (int) y;
+		//if it reaches threshold limit it completed the jump
+		if(yCurr <= yInit - 60) {
+			//finished jumping
+			justJumped = true;
+			//gravity immediately starts affecting
+			falling = true;
+		}
+
+
+	}
+
+	//FALL (GRAVITY)
+	private void falling() {
+		falling = true;
+		y += gravityValue;
+		bounds.y += gravityValue;
 	}
 
 	//CHARACTER ANIMATIONS
@@ -166,39 +211,6 @@ public class Player extends EntityBase {
 		}
 	}
 
-	//JUMP MECHANIC
-	private void jump() {
-		//If button is called set new threshold for y
-		if(callJump) {
-			//Set y to start jump
-			yInit = (int) y;
-			//Start jump
-			initJump  = true;
-			//Await for another call to jump function by player
-			callJump = false;
-		}
-		//MOVE PLAYER Y
-		y -= 10;
-		bounds.y -= 10;
-		//Update current Y
-		yCurr = (int) y;
-		//if it reaches threshold limit it completed the jump
-		if(yCurr <= yInit - 60) {
-			//finished jumping
-			justJumped = true;
-			//gravity immediately starts affecting
-			falling = true;
-		}
-
-
-	}
-
-	//FALL (GRAVITY)
-	private void falling() {
-		falling = true;
-		y += gravityValue;
-		bounds.y += gravityValue;
-	}
 
 
 	//GETTERS AND SETTERS 
@@ -224,6 +236,10 @@ public class Player extends EntityBase {
 
 	public void setFalling(boolean falling) {
 		Player.falling = falling;
+	}
+
+	public Animation getCurrentAnim() {
+		return currentAnim;
 	}
 
 }

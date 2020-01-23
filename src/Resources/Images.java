@@ -126,6 +126,8 @@ public class Images {
 		return null;
 	}
 	
+	//Method acquired from:
+	//https://stackoverflow.com/questions/37758061/rotate-a-buffered-image-in-java
 	public static BufferedImage rotate(BufferedImage bimg, double angle) {
 
 	    int w = bimg.getWidth();    

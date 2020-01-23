@@ -31,7 +31,7 @@ public class Player extends EntityBase {
 
 		//Character Variables
 		score = 0;
-		gravityValue = 4;
+		gravityValue = 2;
 		alive = true;
 		initJump = false; 
 		callJump = false;
